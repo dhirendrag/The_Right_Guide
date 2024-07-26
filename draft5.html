@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rights Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            width: 600px;
+            margin: 50px auto;
+        }
+        .form-container input, .form-container select, .form-container button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        .form-container #experts {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form id="questionForm">
+            <input type="text" id="question" placeholder="Enter your question" required>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="answer"></div>
+        <button id="expertAdviceButton" style="display:none;">Get Expert Advice</button>
+        <div id="experts">
+            <p id="expertList"></p>
+        </div>
+        <select id="languageSelect">
+            <option value="">Select Language</option>
+            <option value="mr">Marathi</option>
+            <option value="hi">Hindi</option>
+        </select>
+        <div id="translation"></div>
+    </div>
+    <script>
+        document.getElementById('questionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const question = document.getElementById('question').value.toLowerCase();
+            const answer = document.getElementById('answer');
+            const expertAdviceButton = document.getElementById('expertAdviceButton');
+            const experts = document.getElementById('experts');
+            const translation = document.getElementById('translation');
+
+            const rightsGuide = {
+                "employment": "Indian labor laws provide various rights for employees, including: \n1. Right to fair wages: Under the Minimum Wages Act, 1948.\n2. Right to equal pay for equal work: Ensured by the Equal Remuneration Act, 1976.\n3. Right to protection against sexual harassment: The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013.\n4. Right to work in a safe environment: Provided by various health and safety regulations under the Factories Act, 1948.\n5. Right to gratuity: Under the Payment of Gratuity Act, 1972.\n6. Right to social security: Through schemes like Employees' Provident Fund (EPF) and Employees' State Insurance (ESI).",
+                "tenant": "Tenant rights in India include: \n1. Right to fair rent: The Rent Control Act in different states ensures fair and reasonable rent. Landlords cannot arbitrarily increase rent beyond state-specified limits.\n2. Right to essential services: Tenants are entitled to essential services like water, electricity, and sanitation. Landlords cannot disconnect these services even in disputes.\n3. Right to live in habitable conditions: Landlords must maintain premises in habitable conditions, ensuring safety and necessary repairs.\n4. Right to a written agreement: Tenants should have a written rental agreement outlining terms and conditions, including rent amount, duration, and responsibilities.\n5. Right to privacy: Landlords cannot enter rented premises without notice, typically 24 hours.\n6. Right to notice before eviction: Tenants cannot be evicted without due process, including valid reasons and a notice period specified in the agreement or state laws.\n7. Right to reclaim security deposit: Tenants are entitled to reclaim their security deposit, minus reasonable deductions for damages or unpaid rent.\n8. Right to challenge unfair eviction: Tenants can challenge unfair eviction notices in court.\n9. Right to sublet: If the rental agreement allows, tenants can sublet the premises.\n10. Right to live in peace and security: Tenants have the right to live peacefully without harassment from the landlord.\n\nKey laws governing tenant rights:\n1. The Rent Control Act: Different states have their versions, such as the Maharashtra Rent Control Act, 1999 and the Delhi Rent Control Act, 1958.\n2. The Transfer of Property Act, 1882: Governs the relationship between landlord and tenant and provides general principles regarding leases and rental agreements.\n3. The Model Tenancy Act, 2021: A uniform framework for tenancy regulation across the country, which states can adopt to reform and streamline rental housing.",
+                "consumer": "Consumer rights in India include: \n1. Right to be informed: About the quality, quantity, potency, purity, standard, and price of goods or services.\n2. Right to choose: Access to a variety of goods and services at competitive prices.\n3. Right to safety: Protection against marketing of goods and services hazardous to life and property.\n4. Right to be heard: Consumers' interests will receive due consideration at appropriate forums.\n5. Right to seek redressal: Against unfair or restrictive trade practices.\n6. Right to consumer education: Information and skills needed for informed choices and protection from exploitation.",
+                "women": "Women's rights in India include: \n1. Right to equal treatment: Ensured by the Constitution of India.\n2. Right to protection against domestic violence: Provided by the Protection of Women from Domestic Violence Act, 2005.\n3. Right to maternity benefits: Under the Maternity Benefit Act, 1961.\n4. Right to equal pay for equal work: Ensured by the Equal Remuneration Act, 1976.\n5. Right to protection against sexual harassment: The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013.",
+                "accident": "Rights of accident victims in India include: \n1. Right to compensation: Under the Motor Vehicles Act, 1988.\n2. Right to medical treatment: Immediate medical attention without upfront payment.\n3. Right to report: File an FIR (First Information Report) at the nearest police station.\n4. Right to legal aid: Access to legal assistance to file compensation claims.",
+                "insurance": "Insurance rights in India include: \n1. Right to complete information: About policy terms and conditions.\n2. Right to timely claim settlement: Insurers are obligated to settle claims within a stipulated time.\n3. Right to grievance redressal: Policyholders can approach insurance ombudsman for grievances.",
+            };
+
+            const rightsGuideTranslated = {
+                "employment": {
+                    "mr": "भारतीय कामगार कायदे कर्मचार्‍यांना विविध हक्क प्रदान करतात, ज्यात: \n1. न्याय्य वेतनाचा हक्क: किमान वेतन अधिनियम, 1948 अंतर्गत.\n2. समान कार्यासाठी समान वेतनाचा हक्क: समान वेतन अधिनियम, 1976 द्वारे सुनिश्चित.\n3. लैंगिक छळापासून संरक्षणाचा हक्क: कार्यस्थळी महिलांच्या लैंगिक छळापासून संरक्षण अधिनियम, 2013.\n4. सुरक्षित वातावरणात काम करण्याचा हक्क: फॅक्टरीज कायदा, 1948 अंतर्गत विविध आरोग्य आणि सुरक्षा नियमांद्वारे प्रदान.\n5. ग्रॅट्युटीचा हक्क: ग्रॅट्युटी अधिनियम, 1972 अंतर्गत.\n6. सामाजिक सुरक्षा अधिकार: कर्मचार्‍यांच्या भविष्य निर्वाह निधी (EPF) आणि कर्मचार्‍यांचे राज्य विमा (ESI) यासारख्या योजनांद्वारे.",
+                    "hi": "भारतीय श्रम कानून कर्मचारियों को विभिन्न अधिकार प्रदान करते हैं, जिनमें शामिल हैं: \n1. न्यायपूर्ण वेतन का अधिकार: न्यूनतम वेतन अधिनियम, 1948 के तहत।\n2. समान कार्य के लिए समान वेतन का अधिकार: समान वेतन अधिनियम, 1976 द्वारा सुनिश्चित।\n3. यौन उत्पीड़न के खिलाफ सुरक्षा का अधिकार: कार्यस्थल पर महिलाओं के यौन उत्पीड़न (रोकथाम, निषेध और निवारण) अधिनियम, 2013।\n4. सुरक्षित वातावरण में काम करने का अधिकार: फॅक्टरीज अधिनियम, 1948 के तहत विभिन्न स्वास्थ्य और सुरक्षा नियमों द्वारा प्रदान किया गया।\n5. ग्रेच्युटी का अधिकार: ग्रेच्युटी अधिनियम, 1972 के तहत।\n6. सामाजिक सुरक्षा का अधिकार: कर्मचारियों भविष्य निधि (EPF) और कर्मचारी राज्य बीमा (ESI) जैसी योजनाओं के माध्यम से।",
+                },
+                "tenant": {
+                    "mr": "भारतातील भाडेकरूंचे अधिकार यांचा समावेश आहे: \n1. न्याय्य भाड्याचा हक्क: वेगवेगळ्या राज्यांतील भाडे नियंत्रण कायदा न्याय्य आणि वाजवी भाडे सुनिश्चित करतो. मालक राज्य-निर्दिष्ट मर्यादेच्या पलीकडे भाडे मनमानीपणे वाढवू शकत नाहीत.\n2. आवश्यक सेवा मिळण्याचा हक्क: भाडेकरूंना पाणी, वीज आणि स्वच्छता यासारख्या आवश्यक सेवा मिळण्याचा हक्क आहे. वादाच्या स्थितीत मालक या सेवा बंद करू शकत नाहीत.\n3. राहण्यायोग्य परिस्थितीत राहण्याचा हक्क: मालकांना सुरक्षितता आणि आवश्यक दुरुस्त्या सुनिश्चित करून पाचलेल्या स्थितीत परिसर ठेवावा लागतो.\n4. लिखित कराराचा हक्क: भाडेकरूंना अटी व शर्तींमध्ये, भाड्याची रक्कम, कालावधी आणि जबाबदारी यांचा समावेश असलेला लिखित भाडेकरार असावा.\n5. गोपनीयतेचा हक्क: मालकांनी पूर्वसूचना न देता भाडेकरूंच्या परिसरात प्रवेश करू नये, सामान्यतः 24 तास.\n6. बेदखलीपूर्वी सूचना मिळण्याचा हक्क: भाडेकरूंना विधी प्रक्रिया शिवाय बेदखल करता येणार नाही, यात वैध कारणे आणि करार किंवा राज्य कायद्यात निर्दिष्ट केलेली सूचना कालावधी समाविष्ट आहे.\n7. सुरक्षा जमा परत मिळण्याचा हक्क: भाडेकरूंना त्यांचा सुरक्षा जमा, वाजवी कपातीशिवाय, किंवा बाकी न राहिलेल्या भाड्यासह, परत मिळण्याचा हक्क आहे.\n8. बेदखलीच्या अयोग्य नोटिसला आव्हान देण्याचा हक्क: भाडेकरूंना अयोग्य बेदखली नोटिसला न्यायालयात आव्हान देण्याचा हक्क आहे.\n9. उपभाडेत राहण्याचा हक्क: जर भाडेकरारने परवानगी दिली असेल तर, भाडेकरूंना परिसर उपभाडेत देण्याचा हक्क आहे.\n10. शांतीत आणि सुरक्षिततेत राहण्याचा हक्क: भाडेकरूंना शांतपणे आणि मालकाच्या छळाविना राहण्याचा हक्क आहे.\n\nभाडेकरूंच्या अधिकारांचे मुख्य कायदे:\n1. भाडे नियंत्रण कायदा: वेगवेगळ्या राज्यांमध्ये त्यांच्या आवृत्त्या आहेत, जसे महाराष्ट्र भाडे नियंत्रण कायदा, 1999 आणि दिल्ली भाडे नियंत्रण कायदा, 1958.\n2. मालमत्तेच्या हस्तांतरणाचा कायदा, 1882: मालक आणि भाडेकरू यांच्यातील संबंध नियंत्रित करतो आणि भाडे आणि भाडेकरारांबाबत सामान्य तत्त्वे प्रदान करतो.\n3. मॉडेल भाडेकरार कायदा, 2021: देशभरातील भाडेगृह नियमनसाठी एकसमान ढांचा, ज्याचा राज्ये दत्तक घेऊ शकतात.",
+                    "hi": "भारत में किरायेदारों के अधिकार शामिल हैं: \n1. न्यायसंगत किराए का अधिकार: विभिन्न राज्यों में किराया नियंत्रण अधिनियम न्यायसंगत और उचित किराया सुनिश्चित करता है। मकान मालिक राज्य-निर्दिष्ट सीमाओं से परे किराया मनमाने ढंग से नहीं बढ़ा सकते।\n2. आवश्यक सेवाओं का अधिकार: किरायेदारों को पानी, बिजली और स्वच्छता जैसी आवश्यक सेवाओं का अधिकार है। विवाद की स्थिति में मकान मालिक इन सेवाओं को डिस्कनेक्ट नहीं कर सकते।\n3. रहने योग्य परिस्थितियों में रहने का अधिकार: मकान मालिकों को सुरक्षा और आवश्यक मरम्मत सुनिश्चित करते हुए परिसर को रहने योग्य स्थिति में बनाए रखना होगा।\n4. लिखित समझौते का अधिकार: किरायेदारों के पास शर्तों और शर्तों, किराए की राशि, अवधि और जिम्मेदारियों सहित लिखित किरायेदारी समझौता होना चाहिए।\n5. गोपनीयता का अधिकार: मकान मालिक बिना नोटिस के किराए के परिसर में प्रवेश नहीं कर सकते, आमतौर पर 24 घंटे।\n6. बेदखली से पहले नोटिस का अधिकार: किरायेदारों को विधिसंगत प्रक्रिया के बिना बेदखल नहीं किया जा सकता, जिसमें वैध कारण और समझौते या राज्य कानूनों में निर्दिष्ट नोटिस अवधि शामिल है।\n7. सुरक्षा जमा वापस पाने का अधिकार: किरायेदारों को उनका सुरक्षा जमा, बिना अनुचित कटौती के, या बिना किसी बकाया किराए के, वापस पाने का अधिकार है।\n8. अनुचित बेदखली के नोटिस को चुनौती देने का अधिकार: किरायेदार अनुचित बेदखली नोटिस को अदालत में चुनौती दे सकते हैं।\n9. उपकिरायेदारी का अधिकार: यदि किराए के समझौते में अनुमति दी गई है, तो किरायेदार परिसर को उपकिरायेदारी पर दे सकते हैं।\n10. शांति और सुरक्षा में रहने का अधिकार: किरायेदारों को मकान मालिक के उत्पीड़न के बिना शांति से रहने का अधिकार है।\n\nकिरायेदार अधिकारों को नियंत्रित करने वाले मुख्य कानून:\n1. किराया नियंत्रण अधिनियम: विभिन्न राज्यों में उनके संस्करण होते हैं, जैसे महाराष्ट्र किराया नियंत्रण अधिनियम, 1999 और दिल्ली किराया नियंत्रण अधिनियम, 1958।\n2. संपत्ति का हस्तांतरण अधिनियम, 1882: मालिक और किरायेदार के बीच संबंधों को नियंत्रित करता है और लीज़ और किरायेदारी समझौतों के संबंध में सामान्य सिद्धांत प्रदान करता है।\n3. मॉडल किरायेदारी अधिनियम, 2021: पूरे देश में किरायेदारी विनियमन के लिए एक समान ढांचा, जिसे राज्य अपनाकर किरायेदारी आवास को सुधार सकते हैं।",
+                },
+                // Continue the translation for other rights as needed
+            };
+
+            if (rightsGuide[question]) {
+                answer.textContent = rightsGuide[question];
+                expertAdviceButton.style.display = 'block';
+                experts.style.display = 'none'; // Hide expert advice initially
+            } else {
+                answer.textContent = 'Sorry, I do not have information on that topic.';
+                expertAdviceButton.style.display = 'none';
+                experts.style.display = 'none'; // Hide expert advice button if no answer is found
+            }
+
+            document.getElementById('languageSelect').addEventListener('change', function() {
+                const selectedLanguage = this.value;
+                if (selectedLanguage && rightsGuideTranslated[question] && rightsGuideTranslated[question][selectedLanguage]) {
+                    translation.textContent = rightsGuideTranslated[question][selectedLanguage];
+                } else {
+                    translation.textContent = '';
+                }
+            });
+        });
+
+        document.getElementById('expertAdviceButton').addEventListener('click', function() {
+            document.getElementById('experts').style.display = 'block';
+            document.getElementById('expertList').textContent = 'Contact these experts for more detailed advice: \n1. Expert A (Contact Info)\n2. Expert B (Contact Info)';
+        });
+    </script>
+</body>
+</html>
